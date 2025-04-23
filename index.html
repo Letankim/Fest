@@ -61,7 +61,9 @@
 
             errorContainer.scrollTop = errorContainer.scrollHeight;
 
-            timeoutId = setTimeout(simulateError, 10);
+            simulateError();
+            simulateError();
+            simulateError();
         }
 
         document.getElementById('stopButton').addEventListener('click', () => {
