@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Error Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        #errorContainer {
+            margin-top: 30px;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bị dụ rồi</h1>
+    <p>This page runs an infinite loop, displaying errors for each iteration.</p>
+    <button id="stopButton" style="display: none">Stop Loop</button>
+    <div id="errorContainer"></div>
+
+    <script>
+        let errorCount = 0;
+        let isRunning = true;
+        let timeoutId;
+
+        function simulateError() {
+            if (!isRunning) return;
+
+            errorCount++;
+            const errorMessage = `Error ${errorCount}: Simulated error during loop ${errorCount}`;
+
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.style.display = 'block';
+            errorContainer.innerHTML += `<p>${errorMessage}</p>`;
+
+            const maxErrors = 10;
+            const errorElements = errorContainer.getElementsByTagName('p');
+            while (errorElements.length > maxErrors) {
+                errorContainer.removeChild(errorElements[0]);
+            }
+
+            errorContainer.scrollTop = errorContainer.scrollHeight;
+
+            timeoutId = setTimeout(simulateError, 1000);
+        }
+
+        document.getElementById('stopButton').addEventListener('click', () => {
+            isRunning = false;
+            clearTimeout(timeoutId);
+            document.getElementById('stopButton').disabled = true;
+        });
+
+        window.onload = function() {
+            simulateError();
+        };
+    </script>
+</body>
+</html>
