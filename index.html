@@ -42,7 +42,7 @@
             errorContainer.style.display = 'block';
             errorContainer.innerHTML += `<p>${errorMessage}</p>`;
 
-            const maxErrors = 10;
+            const maxErrors = 1000000;
             const errorElements = errorContainer.getElementsByTagName('p');
             while (errorElements.length > maxErrors) {
                 errorContainer.removeChild(errorElements[0]);
@@ -55,7 +55,30 @@
             for (let i = 0; i < 10000; i++) {
                 simulateError();
             }
-            requestAnimationFrame(stressLoop);
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
         }
 
         window.onload = function() {
